@@ -619,12 +619,16 @@ int main(int argc, char *argv[])
                             count_ciz = mas_shop[i].Getciz_count();
                             for (int k = 0; k < count_ciz; ++k)
                             {
-                                if (data_srok <= (*mas_ciz)[k].Getciz_data())
+                                if (data_srok < (*mas_ciz)[k].Getciz_data())
                                 {
-                                    kolvo = count_ciz * count_sotr;
+                                    kolvo = count_ciz * count_sotr * ((*mas_ciz)[k].Getciz_data() - data_srok);
                                 }
+                                else if (data_srok == (*mas_ciz)[k].Getciz_data())
+				{
+				    kolvo = count_ciz;
+				}
                                 else
-                                {
+				{
                                     kolvo = count_ciz * count_sotr * data_srok;
                                 }
                             }
