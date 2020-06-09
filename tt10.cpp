@@ -270,7 +270,7 @@ int main(int argc, char *argv[])
 
     unsigned int ciz_data;
     int data_srok;
-    int kolvo = 0;
+    int count = 0;
     int size_ciz;
     int size_sotrudnik;
     int count_sotr;
@@ -487,7 +487,8 @@ int main(int argc, char *argv[])
         {
             for (int i = 0; i < count_shop; i++)
             {
-
+                cout << "Shop #" << i + 1 << endl;
+                cout << mas_shop[i] << endl;
                 ciz_information **mas_ciz = mas_shop[i].Getmas_ciz();
                 if (*mas_ciz != NULL)
                 {
@@ -603,6 +604,7 @@ int main(int argc, char *argv[])
                 cin >> poisk_shop_name;
                 cout << "Введите на какой срок рассчитать кол-во СИЗов" << endl;
                 cin >> data_srok;
+		int count =0;
                 for (int i = 0; i < count_shop; ++i)
                 {
                     if (poisk_shop_name == mas_shop[i].Getshop_name())
@@ -621,18 +623,18 @@ int main(int argc, char *argv[])
                             {
                                 if (data_srok < (*mas_ciz)[k].Getciz_data())
                                 {
-                                    kolvo = count_ciz * count_sotr * ((*mas_ciz)[k].Getciz_data() - data_srok);
+                                    count = count_ciz * count_sotr * ((*mas_ciz)[k].Getciz_data() - data_srok);
                                 }
                                 else if (data_srok == (*mas_ciz)[k].Getciz_data())
 				{
-				    kolvo = count_ciz;
+				    count = count_ciz;
 				}
                                 else
 				{
-                                    kolvo = count_ciz * count_sotr * data_srok;
+                                    count = count_ciz * count_sotr * data_srok;
                                 }
                             }
-                            cout << kolvo << endl;
+                            cout << count << endl;
                         }
                     }
                 }
@@ -657,6 +659,7 @@ int main(int argc, char *argv[])
                     cout << "Введите на какой срок рассчитать кол-во СИЗов" << endl;
                     cin >> data_srok;
                     int check = 0;
+		    int count = 0;
                     for (int i = 0; i < count_shop; ++i)
                     {
                         if (poisk_shop_name == mas_shop[i].Getshop_name())
@@ -684,14 +687,14 @@ int main(int argc, char *argv[])
                                     {
                                         if (data_srok <= (*mas_ciz)[k].Getciz_data())
                                         {
-                                            kolvo = data_srok;
+                                            count = data_srok;
                                         }
                                         else
                                         {
-                                            kolvo = count_ciz * data_srok;
+                                            count = count_ciz * data_srok;
                                         }
                                     }
-                                    cout << kolvo << endl;
+                                    cout << count << endl;
                                 }
                             }
                         }
@@ -709,6 +712,7 @@ int main(int argc, char *argv[])
                 {
                     cout << "Введите на какой срок рассчитать кол-во СИЗов" << endl;
                     cin >> data_srok;
+		    int count = 0;
                     for (int i = 0; i < count_shop; ++i)
                     {
                         sotrudnik_information **mas_sotrudnik = mas_shop[i].Getmas_sotrudnik();
@@ -725,15 +729,15 @@ int main(int argc, char *argv[])
                             {
                                 if (data_srok <= (*mas_ciz)[k].Getciz_data())
                                 {
-                                    kolvo = count_shop * count_ciz * count_sotr;
+                                    count += count_shop * count_ciz * count_sotr;
                                 }
                                 else
                                 {
-                                    kolvo=1;
+                                    count=1;
                                 }
                             }
-                            cout <<"kolvo"<< kolvo << endl;
                         }
+			cout <<"kolvo"<< count << endl;
                     }
                 }
             }
