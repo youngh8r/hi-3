@@ -116,6 +116,10 @@ private:
     string shop_name;
 
 public:
+    ~shop_information()
+    {
+        delete[] mas_sotrudnik;
+    }
     int Getsotrudnik_count()
     {
         return sotrudnik_count;
@@ -535,32 +539,57 @@ int main(int argc, char *argv[])
         break;
         case 7:
         {
-            cout << "Введите фамилию сотрудника: " << endl;
-            cin >> surname_search;
-            cout << "Введите имя сотрудника: " << endl;
-            cin >> name_search;
-            cout << "Введите отчество сотрудника: " << endl;
-            cin >> middlename_search;
-            int check = 0;
-            sotrudnik_information **mas_sotrudnik = mas_shop[count_shop].Getmas_sotrudnik();
-            for (int i = 0; i < count_sotr; ++i)
-            {
-                if ((surname_search == (*mas_sotrudnik)[i].Getsotrudnik_surname()) && (name_search == (*mas_sotrudnik)[i].Getsotrudnik_name()) && (middlename_search == (*mas_sotrudnik)[i].Getsotrudnik_middlename()))
-                {
-                    for (int j = i; j < count_sotr - 1; ++j)
+            cout << "Введите имя цеха: " << endl;
+            cin >> shopname_search;
+			int check = 0;
+			int check2 = 0;
+			for (int i = 0; i < count_shop; ++i)
+			{
+				if (shopname_search == mas_shop[i].Getshop_name())
+				{
+                    sotrudnik_information** mas_sotrudnik = mas_shop[i].Getmas_sotrudnik();
+                    count_sotr = mas_shop[i].Getsotrudnik_count();
+					check2 = 1;
+                    if (count_sotr == 0)
                     {
-                        (*mas_sotrudnik)[j].Getsotrudnik_surname() = (*mas_sotrudnik)[j + 1].Getsotrudnik_surname();
-                        (*mas_sotrudnik)[j].Getsotrudnik_name() = (*mas_sotrudnik)[j + 1].Getsotrudnik_name();
-                        (*mas_sotrudnik)[j].Getsotrudnik_middlename() = (*mas_sotrudnik)[j + 1].Getsotrudnik_middlename();
+                        cout << "Цех пуст!" << endl;
+                        break;
                     }
-                    count_sotr = count_sotr - 1;
-                    check = check + 1;
+                    else 
+                    {
+                        cout << "Введите имя сотрудника: " << endl;
+                        cin >> name_search;
+                        cout << "Введите фамилию сотрудника: " << endl;
+                        cin >> surname_search;
+                        cout << "Введите отчество сотрудника: " << endl;
+                        cin >> middlename_search;
+                        for (int j = 0; j < count_sotr; ++j)
+                        {
+                            if ((surname_search == (*mas_sotrudnik)[j].Getsotrudnik_surname()) && (name_search == (*mas_sotrudnik)[j].Getsotrudnik_name()) && (middlename_search == (*mas_sotrudnik)[j].Getsotrudnik_middlename()))
+                            {
+                                for (int k = j; k < count_sotr - 1; ++k)
+                                {
+                                    (*mas_sotrudnik)[k].Getsotrudnik_surname() = (*mas_sotrudnik)[k + 1].Getsotrudnik_surname();
+                                    (*mas_sotrudnik)[k].Getsotrudnik_name() = (*mas_sotrudnik)[k + 1].Getsotrudnik_name();
+                                    (*mas_sotrudnik)[k].Getsotrudnik_middlename() = (*mas_sotrudnik)[k + 1].Getsotrudnik_middlename();
+                                }
+                                count_sotr = count_sotr - 1;
+                                mas_shop[i].setsotrudnik_count(count_sotr);
+                                check = check + 1;
+                            }
+                        }
+                        if (check == 0)
+                        {
+                            cout << "Сотрудник не найден!" << endl;
+                            break;
+                        }
+                    }
                 }
+			}
+			if (check2 == 0) {
+                cout << "Цех не найден!" << endl;
             }
-            if (check == 0)
-            {
-                cout << "Сотрудник не найден!" << endl;
-            }
+            break;
         }
         case 8:
         {
