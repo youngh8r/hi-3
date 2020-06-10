@@ -118,7 +118,10 @@ private:
 public:
     ~shop_information()
     {
-        delete[] mas_sotrudnik;
+	if(mas_sotrudnik != NULL)
+	{
+        	delete[] mas_sotrudnik;
+	}
     }
     int Getsotrudnik_count()
     {
