@@ -121,11 +121,11 @@ public:
 	if(mas_sotrudnik != NULL)
 	{
         	delete[] mas_sotrudnik;
-		if(mas_ciz != NULL)
-		{
-			delete[] mas_ciz;
-		}
 	}
+	if(mas_ciz != NULL)
+	{
+		delete[] mas_ciz;
+	}    
     }
     int Getsotrudnik_count()
     {
