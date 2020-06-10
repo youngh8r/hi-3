@@ -120,6 +120,7 @@ public:
     {
 	if(mas_sotrudnik != NULL)
 	{
+		delete[] mas_ciz;
         	delete[] mas_sotrudnik;
 	}
     }
